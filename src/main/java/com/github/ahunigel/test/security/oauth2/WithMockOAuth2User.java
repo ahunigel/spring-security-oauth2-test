@@ -1,6 +1,7 @@
 package com.github.ahunigel.test.security.oauth2;
 
 import com.github.ahunigel.test.security.Claim;
+import com.github.ahunigel.test.security.util.ClaimUtils;
 import com.github.ahunigel.test.security.util.MockUserUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,9 +12,7 @@ import org.springframework.security.test.context.support.WithSecurityContextFact
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by Nigel Zheng on 8/3/2018.
@@ -43,7 +42,7 @@ public @interface WithMockOAuth2User {
       OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(
           WithMockOAuth2Client.WithMockOAuth2ClientSecurityContextFactory.getOAuth2Request(annotation.client()),
           MockUserUtils.getAuthentication(annotation.user()));
-      Map<String, String> claims = Arrays.stream(annotation.claims()).collect(Collectors.toMap(Claim::name, Claim::value));
+      Map<String, Object> claims = ClaimUtils.getClaims(annotation.claims());
       if (!claims.isEmpty()) {
         oAuth2Authentication.setDetails(claims);
       }

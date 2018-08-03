@@ -14,4 +14,6 @@ public @interface Claim {
   String name();
 
   String value();
+
+  Class<?> type() default String.class;
 }

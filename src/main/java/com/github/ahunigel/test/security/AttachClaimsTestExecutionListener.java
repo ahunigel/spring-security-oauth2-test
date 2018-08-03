@@ -1,5 +1,6 @@
 package com.github.ahunigel.test.security;
 
+import com.github.ahunigel.test.security.util.ClaimUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -10,10 +11,8 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import java.lang.reflect.AnnotatedElement;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by Nigel.Zheng on 8/3/2018.
@@ -46,7 +45,7 @@ public class AttachClaimsTestExecutionListener extends AbstractTestExecutionList
   public void attachClaimsToAuthentication(AttachClaims annotation) {
     Authentication authentication = TestSecurityContextHolder.getContext().getAuthentication();
     if (authentication != null && authentication instanceof AbstractAuthenticationToken) {
-      Map<String, String> claims = Arrays.stream(annotation.value()).collect(Collectors.toMap(Claim::name, Claim::value));
+      Map<String, Object> claims = ClaimUtils.getClaims(annotation.value());
       Map<String, String> stringMap = toMap(annotation.claims());
       stringMap.entrySet().stream().forEach(entry -> claims.putIfAbsent(entry.getKey(), entry.getValue()));
       if (!claims.isEmpty()) {

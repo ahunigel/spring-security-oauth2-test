@@ -1,5 +1,6 @@
 package com.github.ahunigel.test.security;
 
+import com.github.ahunigel.test.security.util.ClaimUtils;
 import com.github.ahunigel.test.security.util.MockUserUtils;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -10,9 +11,7 @@ import org.springframework.security.test.context.support.WithSecurityContext;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
 
 import java.lang.annotation.*;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by Nigel Zheng on 8/3/2018.
@@ -44,7 +43,7 @@ public @interface WithMockUserAndClaims {
     public SecurityContext createSecurityContext(WithMockUserAndClaims annotation) {
       SecurityContext context = MockUserUtils.getSecurityContext(annotation.user());
       Authentication authentication = context.getAuthentication();
-      Map<String, String> claims = Arrays.stream(annotation.value()).collect(Collectors.toMap(Claim::name, Claim::value));
+      Map<String, Object> claims = ClaimUtils.getClaims(annotation.value());
       if (!claims.isEmpty() && authentication instanceof AbstractAuthenticationToken) {
         ((AbstractAuthenticationToken) authentication).setDetails(claims);
       }

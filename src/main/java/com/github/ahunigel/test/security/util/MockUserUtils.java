@@ -21,6 +21,10 @@ import java.util.stream.Stream;
  * Created by Nigel Zheng on 8/3/2018.
  */
 public class MockUserUtils {
+  private MockUserUtils() {
+    throw new InstantiationError();
+  }
+
   public static SecurityContext getSecurityContext(WithMockUser withMockUser) {
     WithSecurityContext withSecurityContext = AnnotationUtils
         .findAnnotation(withMockUser.getClass(), WithSecurityContext.class);
