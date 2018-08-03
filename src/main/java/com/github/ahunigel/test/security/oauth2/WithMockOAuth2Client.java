@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 
 /**
  * Created by Nigel Zheng on 8/3/2018.
+ * <p>
+ * Emulate running with a mocked oauth2 client
  */
 @Retention(RetentionPolicy.RUNTIME)
 @WithSecurityContext(factory = WithMockOAuth2Client.WithMockOAuth2ClientSecurityContextFactory.class)
