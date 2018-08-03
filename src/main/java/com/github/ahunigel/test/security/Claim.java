@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Repeatable(WithClaims.class)
+@Repeatable(AttachClaims.class)
 public @interface Claim {
 
   String name();

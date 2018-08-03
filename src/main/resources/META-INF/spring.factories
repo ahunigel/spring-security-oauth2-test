@@ -1,0 +1,2 @@
+org.springframework.test.context.TestExecutionListener=\
+com.github.ahunigel.test.security.AttachClaimsTestExecutionListener
