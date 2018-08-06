@@ -19,6 +19,8 @@ import java.util.stream.Stream;
 
 /**
  * Created by Nigel Zheng on 8/3/2018.
+ *
+ * @author nigel
  */
 public class MockUserUtils {
   private MockUserUtils() {

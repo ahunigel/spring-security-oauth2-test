@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Created by Nigel.Zheng on 8/3/2018.
+ * Created by Nigel Zheng on 8/3/2018.
+ *
+ * @author nigel
  */
 public class ClaimUtils {
   private ClaimUtils() {

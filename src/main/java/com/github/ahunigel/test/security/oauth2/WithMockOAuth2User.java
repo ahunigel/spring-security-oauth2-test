@@ -20,6 +20,7 @@ import java.util.Map;
  * Emulate running with a mocked oauth2 client on behalf of user,
  * attach claims as map to mocked oauth2 authentication details
  */
+@WithToken
 @Retention(RetentionPolicy.RUNTIME)
 @WithSecurityContext(factory = WithMockOAuth2User.WithMockOAuth2UserSecurityContextFactory.class)
 public @interface WithMockOAuth2User {

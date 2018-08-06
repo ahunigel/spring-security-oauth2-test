@@ -20,6 +20,7 @@ import java.util.stream.Stream;
  * <p>
  * Emulate running with a mocked oauth2 client
  */
+@WithToken
 @Retention(RetentionPolicy.RUNTIME)
 @WithSecurityContext(factory = WithMockOAuth2Client.WithMockOAuth2ClientSecurityContextFactory.class)
 public @interface WithMockOAuth2Client {

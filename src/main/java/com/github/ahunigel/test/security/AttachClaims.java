@@ -6,6 +6,8 @@ import java.lang.annotation.*;
  * Created by Nigel Zheng on 8/3/2018.
  * <p>
  * Attach claims as map to current authentication details
+ *
+ * @author nigel
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

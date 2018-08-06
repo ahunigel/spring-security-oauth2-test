@@ -19,6 +19,9 @@ _Note: Most code came from the open network. I refactor and enhanced the code, t
 - @WithMockUserAndClaims
     - enhanced @WithMockUser, attach Map-based claims as authentication details
     - equal to @WithMockUser + @AttachClaims
+- @WithToken
+    - add `bearer` token to request header to extract a `PreAuthenticatedAuthenticationToken`,
+    load existing OAuth2Authentication from SecurityContext
 
 ## How to use
 
@@ -65,9 +68,7 @@ Refer to https://jitpack.io/#ahunigel/spring-security-oauth2-test for details.
 
 ## TODOs
 
-1. Mock full oauth2 process, add `bearer` token to request header to extract a `PreAuthenticatedAuthenticationToken`
-
-2. For oauth2 request, add ability to set ResourceServerSecurityConfigurer.stateless to false, maybe an 
+- For oauth2 request, add ability to set ResourceServerSecurityConfigurer.stateless to false, maybe add an 
 annotation like `@ResourceStateLess(false)`
 
-3. Add support for `RestTemplate`
+- Add support for `RestTemplate`

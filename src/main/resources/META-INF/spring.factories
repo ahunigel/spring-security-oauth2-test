@@ -1,2 +1,3 @@
 org.springframework.test.context.TestExecutionListener=\
-com.github.ahunigel.test.security.AttachClaimsTestExecutionListener
+com.github.ahunigel.test.security.AttachClaimsTestExecutionListener,\
+com.github.ahunigel.test.security.oauth2.WithTokenTestExecutionListener
