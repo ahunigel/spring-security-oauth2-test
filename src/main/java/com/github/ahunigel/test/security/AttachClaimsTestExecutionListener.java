@@ -15,10 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Nigel.Zheng on 8/3/2018.
+ * Created by Nigel Zheng on 8/3/2018.
+ *
+ * @author nigel
  */
 public class AttachClaimsTestExecutionListener extends AbstractTestExecutionListener {
-  private static final Logger logger = LoggerFactory.getLogger(AttachClaimsTestExecutionListener.class);
+  private static final Logger log = LoggerFactory.getLogger(AttachClaimsTestExecutionListener.class);
 
   @Override
   public void beforeTestClass(TestContext testContext) throws Exception {
@@ -52,7 +54,7 @@ public class AttachClaimsTestExecutionListener extends AbstractTestExecutionList
         ((AbstractAuthenticationToken) authentication).setDetails(claims);
       }
     } else {
-      logger.warn("No authentication found, do not attach claims");
+      log.warn("No authentication found, do not attach claims");
     }
   }
 

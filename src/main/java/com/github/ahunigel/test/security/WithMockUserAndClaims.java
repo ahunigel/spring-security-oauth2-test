@@ -18,6 +18,8 @@ import java.util.Map;
  * <p>
  * Emulate running with a mocked user,
  * attach claims as map to mocked authentication details
+ *
+ * @author nigel
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
