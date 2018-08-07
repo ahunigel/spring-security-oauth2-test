@@ -22,7 +22,7 @@ public @interface AttachClaims {
   Claim[] value();
 
   /**
-   * key-value paired string array, redundant value will be ignored
+   * key-value paired string array, separated by <code>:</code> or <code>=</code>
    * <p>
    * would merge with #value() if key is absent
    *

@@ -11,17 +11,18 @@ Attach Map-based claims to mocked user as authentication details, the claims can
 _Note: Most code came from the open network. I refactor and enhanced the code, then we have this java-library._
 
 ## Features
-- @WithMockOAuth2Client
-- @WithMockOAuth2User
+- `@WithMockOAuth2Client`
+- `@WithMockOAuth2User`
     - mock an oauth2 user, attach claims to OAuth2Authentication details
-- @AttachClaims
-    - attach Map-based claims to current authentication, should work with @WithMockUser
-- @WithMockUserAndClaims
-    - enhanced @WithMockUser, attach Map-based claims as authentication details
-    - equal to @WithMockUser + @AttachClaims
-- @WithToken
+- `@AttachClaims`
+    - attach Map-based claims to current authentication, should work with `@WithMockUser`
+- `@WithMockUserAndClaims`
+    - enhanced `@WithMockUser`, attach Map-based claims as authentication details
+    - equal to `@WithMockUser` + `@AttachClaims`
+- `@WithToken`
     - add `bearer` token to request header to extract a `PreAuthenticatedAuthenticationToken`,
     load existing OAuth2Authentication from SecurityContext
+    - require `@MockTokenServices` on test class
 
 ## How to use
 
@@ -37,38 +38,51 @@ allprojects {
 ## Step 2. Add the dependency
 ```groovy
 dependencies {
-    implementation 'com.github.ahunigel:spring-security-oauth2-test:master-SNAPSHOT'
+    implementation 'com.github.ahunigel:spring-security-oauth2-test:{version}'
 }
 ```
-## Step 3. Write test
+_Refer to https://jitpack.io/#ahunigel/spring-security-oauth2-test for details._
+
+## Step 3. Write tests
 ```java
 @WithMockOAuth2User(
-      client = @WithMockOAuth2Client(
-          clientId = "custom-client",
-          scope = {"custom-scope", "other-scope"},
-          authorities = {"custom-authority", "ROLE_CUSTOM_CLIENT"}),
-      user = @WithMockUser(
-          username = "custom-username",
-          authorities = {"custom-user-authority"}),
-      claims = {
-          @Claim(name = "user_id", value = "6", type = Long.class),
-          @Claim(name = "role_id", value = "1"),
-          @Claim(name = "is_social_user", value = "false")
-      })
+    client = @WithMockOAuth2Client(
+      clientId = "custom-client",
+      scope = {"custom-scope", "other-scope"},
+      authorities = {"custom-authority", "ROLE_CUSTOM_CLIENT"}),
+    user = @WithMockUser(
+      username = "custom-username",
+      authorities = {"custom-user-authority"}),
+    claims = @AttachClaims({
+      @Claim(name = "user_id", value = "6", type = Long.class),
+      @Claim(name = "role_id", value = "1"),
+      @Claim(name = "is_social_user", value = "false")
+    })
+}
 ```
 or
 ```java
 @AttachClaims(value = {
-  @Claim(name = "user_id", value = "6", type = Long.class),
-  @Claim(name = "role_id", value = "1"),
-  @Claim(name = "is_social_user", value = "false")
-}, claims = {ROLE_NAME, "ADMIN"})
+    @Claim(name = "user_id", value = "6", type = Long.class),
+    @Claim(name = "role_id", value = "1"),
+    @Claim(name = "is_social_user", value = "false")
+}, claims = {"role_name:ADMIN", "user_name=ahunigel"})
+@WithMockUser()
 ```
-Refer to https://jitpack.io/#ahunigel/spring-security-oauth2-test for details.
+or
+```java
+@WithMockUserAndClaims(
+    @AttachClaims(value = {
+        @Claim(name = "user_id", value = "6", type = Long.class),
+        @Claim(name = "role_id", value = "1"),
+        @Claim(name = "is_social_user", value = "false")},
+        claims = {"role_name:ADMIN", "user_name=ahunigel"})
+)
+```
 
 ## TODOs
 
 - For oauth2 request, add ability to set ResourceServerSecurityConfigurer.stateless to false, maybe add an 
-annotation like `@ResourceStateLess(false)`
+annotation like `@ResourceStateless(false)`
 
 - Add support for `RestTemplate`

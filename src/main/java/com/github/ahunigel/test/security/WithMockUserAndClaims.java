@@ -28,15 +28,15 @@ import java.util.Map;
 @WithSecurityContext(factory = WithMockUserAndClaims.WithMockUserWithClaimsSecurityContextFactory.class)
 public @interface WithMockUserAndClaims {
   /**
-   * Return the contained {@link Claim} annotations.
+   * Return the contained {@link AttachClaims} annotations.
    *
    * @return the claims
    */
   @AliasFor("claims")
-  Claim[] value();
+  AttachClaims value();
 
   @AliasFor("value")
-  Claim[] claims();
+  AttachClaims claims();
 
   WithMockUser user() default @WithMockUser();
 
@@ -45,7 +45,7 @@ public @interface WithMockUserAndClaims {
     public SecurityContext createSecurityContext(WithMockUserAndClaims annotation) {
       SecurityContext context = MockUserUtils.getSecurityContext(annotation.user());
       Authentication authentication = context.getAuthentication();
-      Map<String, Object> claims = ClaimUtils.getClaims(annotation.value());
+      Map<String, Object> claims = ClaimUtils.extractClaims(annotation.value());
       if (!claims.isEmpty() && authentication instanceof AbstractAuthenticationToken) {
         ((AbstractAuthenticationToken) authentication).setDetails(claims);
       }

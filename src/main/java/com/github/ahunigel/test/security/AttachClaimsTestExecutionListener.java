@@ -11,7 +11,6 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import java.lang.reflect.AnnotatedElement;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -47,9 +46,7 @@ public class AttachClaimsTestExecutionListener extends AbstractTestExecutionList
   public void attachClaimsToAuthentication(AttachClaims annotation) {
     Authentication authentication = TestSecurityContextHolder.getContext().getAuthentication();
     if (authentication != null && authentication instanceof AbstractAuthenticationToken) {
-      Map<String, Object> claims = ClaimUtils.getClaims(annotation.value());
-      Map<String, String> stringMap = toMap(annotation.claims());
-      stringMap.entrySet().stream().forEach(entry -> claims.putIfAbsent(entry.getKey(), entry.getValue()));
+      Map<String, Object> claims = ClaimUtils.extractClaims(annotation);
       if (!claims.isEmpty()) {
         ((AbstractAuthenticationToken) authentication).setDetails(claims);
       }
@@ -58,11 +55,4 @@ public class AttachClaimsTestExecutionListener extends AbstractTestExecutionList
     }
   }
 
-  private Map<String, String> toMap(String[] claims) {
-    final Map<String, String> map = new HashMap<>();
-    for (int i = 0; i + 1 < claims.length; i += 2) {
-      map.put(claims[i], claims[i + 1]);
-    }
-    return map;
-  }
 }

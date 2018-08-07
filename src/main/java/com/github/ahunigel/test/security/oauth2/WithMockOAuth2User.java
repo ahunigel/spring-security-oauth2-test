@@ -1,6 +1,6 @@
 package com.github.ahunigel.test.security.oauth2;
 
-import com.github.ahunigel.test.security.Claim;
+import com.github.ahunigel.test.security.AttachClaims;
 import com.github.ahunigel.test.security.util.ClaimUtils;
 import com.github.ahunigel.test.security.util.MockUserUtils;
 import org.springframework.security.core.context.SecurityContext;
@@ -29,11 +29,11 @@ public @interface WithMockOAuth2User {
   WithMockUser user() default @WithMockUser();
 
   /**
-   * Return the contained {@link Claim} annotations.
+   * Return the contained {@link AttachClaims} annotations.
    *
    * @return the claims
    */
-  Claim[] claims();
+  AttachClaims claims() default @AttachClaims({});
 
   class WithMockOAuth2UserSecurityContextFactory implements WithSecurityContextFactory<WithMockOAuth2User> {
 
@@ -43,7 +43,7 @@ public @interface WithMockOAuth2User {
       OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(
           WithMockOAuth2Client.WithMockOAuth2ClientSecurityContextFactory.getOAuth2Request(annotation.client()),
           MockUserUtils.getAuthentication(annotation.user()));
-      Map<String, Object> claims = ClaimUtils.getClaims(annotation.claims());
+      Map<String, Object> claims = ClaimUtils.extractClaims(annotation.claims());
       if (!claims.isEmpty()) {
         oAuth2Authentication.setDetails(claims);
       }
