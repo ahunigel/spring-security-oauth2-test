@@ -4,7 +4,6 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotatedElementUtils;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -85,7 +84,7 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
     Assert.state(withToken != null, "No @WithToken exists!!!");
     MockMvc mockMvc = testContext.getApplicationContext().getBean(MockMvc.class);
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/")
-        .with(testSecurityContext()).with(bearerAuthPostProcessor(withToken.value()));
+        .with(testSecurityContext()).with(bearerTokenProcessor(withToken.value()));
     // stash original default request builder
     RequestBuilder originalRequestBuilder = (RequestBuilder) ReflectionTestUtils.getField(mockMvc, MockMvc.class,
         "defaultRequestBuilder");
@@ -122,26 +121,15 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
     ReflectionTestUtils.invokeSetterMethod(mockMvc, "setDefaultRequest", requestBuilder, RequestBuilder.class);
   }
 
-  private RequestPostProcessor bearerAuthPostProcessor(String token) {
-    return new BearerAuthPostProcessor(token);
-  }
-
-  class BearerAuthPostProcessor implements RequestPostProcessor {
-    private final String token;
-
-    BearerAuthPostProcessor(String token) {
-      this.token = token;
-    }
-
-    @Override
-    public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-      String authHeader = request.getHeader("Authorization");
+  private RequestPostProcessor bearerTokenProcessor(String token) {
+    return mockRequest -> {
+      String authHeader = mockRequest.getHeader("Authorization");
       if (!StringUtils.hasText(authHeader)) {
-        request.addHeader("Authorization", "Bearer " + token);
+        mockRequest.addHeader("Authorization", "Bearer " + token);
       } else {
         log.warn("DO NOT OVERRIDE existing authorization header: {}", authHeader);
       }
-      return request;
-    }
+      return mockRequest;
+    };
   }
 }
