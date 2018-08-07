@@ -4,9 +4,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.MockReset;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Created by Nigel Zheng on 8/7/2018.
  */
-@MockBean(value = {ResourceServerTokenServices.class}, reset = MockReset.NONE)
+@Retention(RetentionPolicy.RUNTIME)
+@MockBean(value = {ResourceServerTokenServices.class}, reset = MockReset.AFTER)
 public @interface MockTokenServices {
 }
