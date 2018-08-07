@@ -46,6 +46,7 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
   public void beforeTestClass(TestContext testContext) throws Exception {
     Annotation annotation = AnnotatedElementUtils.findMergedAnnotation(testContext.getTestClass(), WithToken.class);
     if (annotation != null) {
+      verifyTokenServicesMocked(testContext.getTestClass());
       addAuthHeader(testContext.getTestClass(), testContext, (WithToken) annotation);
     }
   }
@@ -54,6 +55,7 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
   public void beforeTestMethod(TestContext testContext) throws Exception {
     Annotation annotation = AnnotatedElementUtils.findMergedAnnotation(testContext.getTestMethod(), WithToken.class);
     if (annotation != null) {
+      verifyTokenServicesMocked(testContext.getTestClass());
       addAuthHeader(testContext.getTestMethod(), testContext, (WithToken) annotation);
     }
   }
@@ -72,6 +74,11 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
     if (annotation != null) {
       removeAuthHeader(testContext.getTestClass(), testContext);
     }
+  }
+
+  private void verifyTokenServicesMocked(Class<?> testClass) {
+    MockTokenServices annotation = AnnotatedElementUtils.findMergedAnnotation(testClass, MockTokenServices.class);
+    Assert.state(annotation != null, "Missing @MockTokenServices on class level");
   }
 
   private void addAuthHeader(AnnotatedElement annotated, TestContext testContext, WithToken withToken) {
