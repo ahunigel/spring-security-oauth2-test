@@ -65,8 +65,9 @@ or
 @AttachClaims(value = {
     @Claim(name = "user_id", value = "6", type = Long.class),
     @Claim(name = "role_id", value = "1"),
-    @Claim(name = "is_social_user", value = "false")
-}, claims = {"role_name:ADMIN", "user_name=ahunigel"})
+    @Claim(name = "is_social_user", value = "false")},
+    claims = {"email:ahunigel@gmail.com", "user_name=ahunigel"}
+)
 @WithMockUser()
 ```
 or
@@ -76,9 +77,18 @@ or
         @Claim(name = "user_id", value = "6", type = Long.class),
         @Claim(name = "role_id", value = "1"),
         @Claim(name = "is_social_user", value = "false")},
-        claims = {"role_name:ADMIN", "user_name=ahunigel"})
+        claims = {"email:ahunigel@gmail.com", "user_name=ahunigel"}
+    )
 )
 ```
+
+## References
+- [How to get @WebMvcTest work with OAuth?](https://stackoverflow.com/questions/48540152/how-to-get-webmvctest-work-with-oauth)
+- [Faking OAuth2 Single Sign-on in Spring](http://engineering.pivotal.io/post/faking_oauth_sso/)
+- [@WithSecurityContext](https://docs.spring.io/spring-security/site/docs/current/reference/html/test-method.html#test-method-withsecuritycontext)
+- [Spring MVC Test Integration](https://docs.spring.io/spring-security/site/docs/current/reference/html/test-mockmvc.html)
+- [OAuth2 Autoconfig](https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/htmlsingle/)
+- [Retrieve User Information in Spring Security](https://www.baeldung.com/get-user-in-spring-security)
 
 ## TODOs
 
