@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.testSecurityContext;
 
 /**
- * Created by Nigel Zheng on 2018/8/6.
+ * Created by Nigel Zheng on 8/7/2018.
  * <p>
  * Add <code>Authorization</code> header to token request, extract an {@link PreAuthenticatedAuthenticationToken},
  * and then load an existing {@link OAuth2Authentication} from {@link SecurityContext}

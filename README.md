@@ -23,6 +23,8 @@ _Note: Most code came from the open network. I refactor and enhanced the code, t
     - add `bearer` token to request header to extract a `PreAuthenticatedAuthenticationToken`,
     load existing OAuth2Authentication from SecurityContext
     - require `@MockTokenServices` on test class
+- `@ResourcesNonStateless`
+    - allow non token-based authentication to access oauth2 resources
 
 ## How to use
 
@@ -89,10 +91,8 @@ or
 - [Spring MVC Test Integration](https://docs.spring.io/spring-security/site/docs/current/reference/html/test-mockmvc.html)
 - [OAuth2 Autoconfig](https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/htmlsingle/)
 - [Retrieve User Information in Spring Security](https://www.baeldung.com/get-user-in-spring-security)
+- [Spring Security OAuth](https://projects.spring.io/spring-security-oauth/docs/Home.html)
 
 ## TODOs
-
-- For oauth2 request, add ability to set ResourceServerSecurityConfigurer.stateless to false, maybe add an 
-annotation like `@ResourceStateless(false)`
 
 - Add support for `RestTemplate`

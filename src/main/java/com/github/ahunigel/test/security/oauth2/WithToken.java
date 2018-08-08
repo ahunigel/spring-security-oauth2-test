@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by Nigel Zheng on 2018/8/7.
+ * Created by Nigel Zheng on 8/7/2018.
  * <p>
  * Emulate an OAuth2 token request, would extract an {@link PreAuthenticatedAuthenticationToken}
  * <p>
