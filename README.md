@@ -92,6 +92,7 @@ or
 - [OAuth2 Autoconfig](https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/htmlsingle/)
 - [Retrieve User Information in Spring Security](https://www.baeldung.com/get-user-in-spring-security)
 - [Spring Security OAuth](https://projects.spring.io/spring-security-oauth/docs/Home.html)
+- [Use @WithMockUser with @SpringBootTest inside an oAuth2 Resource Server Application](https://stackoverflow.com/questions/41824885/use-withmockuser-with-springboottest-inside-an-oauth2-resource-server-applic)
 
 ## TODOs
 
