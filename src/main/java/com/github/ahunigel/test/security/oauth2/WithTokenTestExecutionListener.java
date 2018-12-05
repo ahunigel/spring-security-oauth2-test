@@ -7,6 +7,7 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.test.context.TestSecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
@@ -24,6 +25,7 @@ import org.springframework.util.StringUtils;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.testSecurityContext;
@@ -94,6 +96,13 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
     when(tokenServices.loadAuthentication(withToken.value())).thenAnswer(invocation -> {
       Authentication authentication = TestSecurityContextHolder.getContext().getAuthentication();
       if (authentication instanceof OAuth2Authentication) {
+        if (authentication.getDetails() instanceof OAuth2AuthenticationDetails) {
+          // reset details to claims when invoke mockmvc request more than once
+          Object decodedDetails = ((OAuth2AuthenticationDetails) authentication.getDetails()).getDecodedDetails();
+          if (decodedDetails instanceof Map) {
+            ((OAuth2Authentication) authentication).setDetails(decodedDetails);
+          }
+        }
         return (OAuth2Authentication) authentication;
       }
       return null;
