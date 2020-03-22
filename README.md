@@ -94,6 +94,11 @@ or
 - [Spring Security OAuth](https://projects.spring.io/spring-security-oauth/docs/Home.html)
 - [Use @WithMockUser with @SpringBootTest inside an oAuth2 Resource Server Application](https://stackoverflow.com/questions/41824885/use-withmockuser-with-springboottest-inside-an-oauth2-resource-server-applic)
 
+## See Also
+- [spring-toolkit](https://jitpack.io/#ahunigel/spring-toolkit)
+- [spring-test-toolkit](https://github.com/ahunigel/spring-test-toolkit)
+- [spring-security-oauth2-test](https://github.com/ahunigel/spring-security-oauth2-test)
+
 ## TODOs
 
 - Add support for `RestTemplate`
