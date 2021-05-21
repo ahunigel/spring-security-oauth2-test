@@ -102,3 +102,4 @@ or
 ## TODOs
 
 - Add support for `RestTemplate`
+- Add unit test
