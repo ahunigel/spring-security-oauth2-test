@@ -1,7 +1,7 @@
 plugins {
     id "org.sonarqube" version "3.2.0"
     id "io.freefair.lombok" version "5.3.3.3"
-    id 'java'
+    id 'java-library'
     id 'jacoco'
 }
 
@@ -21,9 +21,9 @@ repositories {
     maven {
         url 'https://repo.spring.io/libs-milestone'
     }
-    maven { url "http://repos.spring.io/snapshot" }
-    maven { url "http://repos.spring.io/milestone" }
-    maven { url "http://repos.spring.io/release" }
+    maven { url "https://repos.spring.io/snapshot" }
+    maven { url "https://repos.spring.io/milestone" }
+    maven { url "https://repos.spring.io/release" }
     mavenCentral()
 }
 
