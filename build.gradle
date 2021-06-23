@@ -21,9 +21,9 @@ repositories {
     maven {
         url 'https://repo.spring.io/libs-milestone'
     }
-    maven { url "http://repo.spring.io/snapshot" }
-    maven { url "http://repo.spring.io/milestone" }
-    maven { url "http://repo.spring.io/release" }
+    maven { url "http://repos.spring.io/snapshot" }
+    maven { url "http://repos.spring.io/milestone" }
+    maven { url "http://repos.spring.io/release" }
     mavenCentral()
 }
 
