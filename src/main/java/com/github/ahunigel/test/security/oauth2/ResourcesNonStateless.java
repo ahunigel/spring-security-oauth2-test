@@ -2,6 +2,7 @@ package com.github.ahunigel.test.security.oauth2;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
@@ -29,6 +30,10 @@ public @interface ResourcesNonStateless {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
       resources.stateless(false);
+    }
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
     }
   }
 }

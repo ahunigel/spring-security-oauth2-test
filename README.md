@@ -101,5 +101,7 @@ or
 
 ## TODOs
 
+- Attach claims for @WithMockOAuth2Client/@WithMockOAuth2User via @AttachClaims 
+- Migrate Spring Security OAuth 2.x application to Spring Security 5.2
 - Add support for `RestTemplate`
 - Add unit test
