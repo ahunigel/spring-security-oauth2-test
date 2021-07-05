@@ -39,3 +39,11 @@ dependencies {
 
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 }
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
