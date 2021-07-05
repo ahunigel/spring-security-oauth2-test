@@ -19,12 +19,10 @@ version '2.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
-    }
-    maven { url "https://repos.spring.io/snapshot" }
-    maven { url "https://repos.spring.io/milestone" }
-    maven { url "https://repos.spring.io/release" }
+    maven { url "https://repo.spring.io/release" }
+    maven { url 'https://repo.spring.io/libs-milestone' }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo.spring.io/snapshot" }
     mavenCentral()
 }
 
