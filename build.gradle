@@ -6,14 +6,6 @@ plugins {
     id 'jacoco'
 }
 
-ext {
-    set('springCloudVersion', "2021.0.1")
-    set('springBootVersion', "2.6.4")
-}
-
-group 'com.github.ahunigel'
-version project.findProperty("version")
-
 sourceCompatibility = 1.8
 
 repositories {
