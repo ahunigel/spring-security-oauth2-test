@@ -7,8 +7,8 @@ plugins {
 }
 
 ext {
-    set('springCloudVersion', "2021.0.0")
-    set('springBootVersion', "2.6.2")
+    set('springCloudVersion', "2021.0.1")
+    set('springBootVersion', "2.6.4")
 }
 
 group 'com.github.ahunigel'
