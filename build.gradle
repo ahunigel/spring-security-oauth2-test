@@ -20,7 +20,7 @@ dependencies {
     api platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
     api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
 
-    api "org.springframework.security.oauth:spring-security-oauth2:latest.release"
+    api "org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE"
     api "org.springframework.boot:spring-boot-starter-test"
     api "org.springframework.security:spring-security-test"
     api group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
