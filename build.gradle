@@ -17,7 +17,7 @@ repositories {
 }
 
 ext {
-    springBootVersion = '2.7.8'
+    springBootVersion = '3.0.3'
     springCloudVersion = '2022.0.1'
 }
 
@@ -33,6 +33,7 @@ dependencies {
     implementation group: 'junit', name: 'junit'
 
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '4.0.4'
 }
 
 publishing {
