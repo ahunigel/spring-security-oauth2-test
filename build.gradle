@@ -30,7 +30,7 @@ dependencies {
     api "org.springframework.security:spring-security-test"
     api group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
 
-    api group: 'junit', name: 'junit'
+    implementation group: 'junit', name: 'junit'
 
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 }
