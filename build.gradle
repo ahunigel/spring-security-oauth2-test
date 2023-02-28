@@ -1,6 +1,6 @@
 plugins {
     id "org.sonarqube" version "4.0.0.2929"
-    id "io.freefair.lombok" version "6.6.2"
+    id "io.freefair.lombok" version "6.6.3"
     id 'java-library'
     id 'maven-publish'
     id 'jacoco'
