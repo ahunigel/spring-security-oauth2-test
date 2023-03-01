@@ -95,6 +95,7 @@ or
 - [Use @WithMockUser with @SpringBootTest inside an oAuth2 Resource Server Application](https://stackoverflow.com/questions/41824885/use-withmockuser-with-springboottest-inside-an-oauth2-resource-server-applic)
 
 ## See Also
+- [springkit-bom](https://github.com/ahunigel/springkit-bom)
 - [spring-security-oauth2-test](https://github.com/ahunigel/spring-security-oauth2-test)
 - [spring-toolkit](https://github.com/ahunigel/spring-toolkit)
 - [spring-test-toolkit](https://github.com/ahunigel/spring-test-toolkit)
