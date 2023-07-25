@@ -17,7 +17,7 @@ repositories {
 }
 
 ext {
-    springBootVersion = '3.1.1'
+    springBootVersion = '3.1.2'
     springCloudVersion = '2022.0.3'
 }
 
