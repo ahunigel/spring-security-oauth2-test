@@ -1,0 +1,7 @@
+name: Dependabot auto-merge
+
+on: pull_request
+
+jobs:
+  build:
+    uses: ahunigel/reusable-workflows/.github/workflows/dependabot-auto-merge.yml@main
