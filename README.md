@@ -60,7 +60,7 @@ _Refer to https://jitpack.io/#ahunigel/spring-security-oauth2-test for details._
       @Claim(name = "role_id", value = "1"),
       @Claim(name = "is_social_user", value = "false")
     })
-}
+)
 ```
 or
 ```java
