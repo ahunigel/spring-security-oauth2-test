@@ -22,8 +22,8 @@ ext {
 }
 
 dependencies {
-    api platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-    api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
 
     implementation "org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE"
     implementation "org.springframework.security:spring-security-oauth2-client:6.3.4"
