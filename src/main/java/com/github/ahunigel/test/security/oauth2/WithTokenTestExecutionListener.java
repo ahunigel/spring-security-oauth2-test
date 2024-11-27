@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
@@ -25,10 +27,13 @@ import org.springframework.util.StringUtils;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.Map;
 
+import static com.github.ahunigel.test.security.oauth2.TestSecurityConf.mockRepo;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.testSecurityContext;
+import static org.springframework.security.oauth2.core.OAuth2AccessToken.TokenType.BEARER;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
 /**
  * Created by Nigel Zheng on 8/7/2018.
@@ -45,19 +50,19 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
 
   @Override
   public void beforeTestClass(TestContext testContext) throws Exception {
-    Annotation annotation = AnnotatedElementUtils.findMergedAnnotation(testContext.getTestClass(), WithToken.class);
+    WithToken annotation = AnnotatedElementUtils.findMergedAnnotation(testContext.getTestClass(), WithToken.class);
     if (annotation != null) {
       verifyTokenServicesMocked(testContext.getTestClass());
-      addAuthHeader(testContext.getTestClass(), testContext, (WithToken) annotation);
+      addAuthHeader(testContext.getTestClass(), testContext, annotation);
     }
   }
 
   @Override
   public void beforeTestMethod(TestContext testContext) throws Exception {
-    Annotation annotation = AnnotatedElementUtils.findMergedAnnotation(testContext.getTestMethod(), WithToken.class);
+    WithToken annotation = AnnotatedElementUtils.findMergedAnnotation(testContext.getTestMethod(), WithToken.class);
     if (annotation != null) {
       verifyTokenServicesMocked(testContext.getTestClass());
-      addAuthHeader(testContext.getTestMethod(), testContext, (WithToken) annotation);
+      addAuthHeader(testContext.getTestMethod(), testContext, annotation);
     }
   }
 
@@ -79,19 +84,36 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
 
   private void verifyTokenServicesMocked(Class<?> testClass) {
     MockTokenServices annotation = AnnotatedElementUtils.findMergedAnnotation(testClass, MockTokenServices.class);
-    Assert.state(annotation != null, "Missing @MockTokenServices on class level");
+//    Assert.state(annotation != null, "Missing @MockTokenServices on class level");
   }
 
   private void addAuthHeader(AnnotatedElement annotated, TestContext testContext, WithToken withToken) {
     Assert.state(withToken != null, "No @WithToken exists!!!");
     MockMvc mockMvc = testContext.getApplicationContext().getBean(MockMvc.class);
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/")
-        .with(testSecurityContext()).with(bearerTokenProcessor(withToken.value()));
+        .with(testSecurityContext()).with(bearerTokenProcessor(withToken.value()))
+            .with(oidcLogin())
+            .with(oauth2Client("my-trusted-client"))
+//                .accessToken(new OAuth2AccessToken(BEARER, "token", null, null, Collections.singleton("message:read"))))
+        ;
     // stash original default request builder
     RequestBuilder originalRequestBuilder = (RequestBuilder) ReflectionTestUtils.getField(mockMvc, MockMvc.class,
         "defaultRequestBuilder");
     testContext.setAttribute(attributeName(annotated), originalRequestBuilder);
     setDefaultRequestBuilder(mockMvc, requestBuilder);
+
+//    mockClientRegistrationRepo(testContext);
+
+    mockTokenServices(testContext, withToken);
+  }
+
+  private void mockClientRegistrationRepo(TestContext testContext) {
+    InMemoryClientRegistrationRepository clientRegistrationRepository = testContext.getApplicationContext().getBean(InMemoryClientRegistrationRepository.class);
+
+    mockRepo(clientRegistrationRepository);
+  }
+
+  private void mockTokenServices(TestContext testContext, WithToken withToken) {
     ResourceServerTokenServices tokenServices = testContext.getApplicationContext().getBean(ResourceServerTokenServices.class);
     when(tokenServices.loadAuthentication(withToken.value())).thenAnswer(invocation -> {
       Authentication authentication = TestSecurityContextHolder.getContext().getAuthentication();

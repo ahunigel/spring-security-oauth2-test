@@ -35,6 +35,14 @@ dependencies {
 
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
+    testImplementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
+
+    testImplementation "org.springframework.integration:spring-integration-test"
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation "org.junit.platform:junit-platform-suite-engine"
+    testImplementation "org.assertj:assertj-core"
+    testImplementation 'org.awaitility:awaitility'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 publishing {
