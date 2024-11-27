@@ -93,6 +93,7 @@ or
 - [Retrieve User Information in Spring Security](https://www.baeldung.com/get-user-in-spring-security)
 - [Spring Security OAuth](https://projects.spring.io/spring-security-oauth/docs/Home.html)
 - [Use @WithMockUser with @SpringBootTest inside an oAuth2 Resource Server Application](https://stackoverflow.com/questions/41824885/use-withmockuser-with-springboottest-inside-an-oauth2-resource-server-applic)
+- [Spring Cloud Supported Versions](https://github.com/spring-cloud/spring-cloud-release/wiki/Supported-Versions)
 
 ## See Also
 - [springkit-bom](https://github.com/ahunigel/springkit-bom)
