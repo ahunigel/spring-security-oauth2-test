@@ -29,7 +29,7 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-client:6.4.2"
     api "org.springframework.boot:spring-boot-starter-test"
     api "org.springframework.security:spring-security-test"
-    api group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
+    api group: 'commons-beanutils', name: 'commons-beanutils', version: '1.10.0'
 
     implementation group: 'junit', name: 'junit'
 
