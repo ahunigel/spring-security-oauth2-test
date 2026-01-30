@@ -67,7 +67,7 @@ public class SerializationHelper {
   }
 
   public <T> String asJsonString(T payload) {
-    return asString(payload, MediaType.APPLICATION_JSON_UTF8);
+    return asString(payload, MediaType.APPLICATION_JSON);
   }
 
   public static final class ByteArrayHttpOutputMessage implements HttpOutputMessage {
