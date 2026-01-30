@@ -1,13 +1,13 @@
 package com.github.ahunigel.test.security.helper;
 
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
@@ -22,7 +22,7 @@ public class MockMvcHelper {
 
   protected final SerializationHelper conv;
 
-  public MockMvcHelper(MockMvc mockMvc, ObjectFactory<HttpMessageConverters> messageConverters,
+  public MockMvcHelper(MockMvc mockMvc, List<HttpMessageConverter<?>> messageConverters,
                        MediaType defaultMediaType) {
     this.mockMvc = mockMvc;
     this.conv = new SerializationHelper(messageConverters);
