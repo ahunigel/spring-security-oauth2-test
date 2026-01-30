@@ -8,10 +8,10 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven { url "https://repo.spring.io/release" }
-    //maven { url 'https://repo.spring.io/libs-milestone' }
-    maven { url "https://repo.spring.io/milestone" }
-    //maven { url "https://repo.spring.io/snapshot" }
+    maven { url = "https://repo.spring.io/release" }
+    //maven { url = 'https://repo.spring.io/libs-milestone' }
+    maven { url = "https://repo.spring.io/milestone" }
+    //maven { url = "https://repo.spring.io/snapshot" }
 }
 
 ext {
@@ -27,12 +27,12 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-client:7.0.2"
     api "org.springframework.boot:spring-boot-starter-test"
     api "org.springframework.security:spring-security-test"
-    api group: 'commons-beanutils', name: 'commons-beanutils', version: '1.11.0'
+    api "commons-beanutils:commons-beanutils:1.11.0"
 
-    implementation group: 'junit', name: 'junit'
+    implementation "junit:junit"
 
-    compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
-    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
+    compileOnly "javax.servlet:javax.servlet-api:4.0.1"
+    compileOnly "jakarta.servlet:jakarta.servlet-api:6.1.0"
 }
 
 publishing {

@@ -1,7 +1,5 @@
 package com.github.ahunigel.test.security.helper;
 
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -17,9 +15,9 @@ import java.util.stream.Collectors;
  * Created by Nigel Zheng on 7/31/2018.
  */
 public class SerializationHelper {
-  private final ObjectFactory<HttpMessageConverters> messageConverters;
+  private final List<HttpMessageConverter<?>> messageConverters;
 
-  public SerializationHelper(ObjectFactory<HttpMessageConverters> messageConverters) {
+  public SerializationHelper(List<HttpMessageConverter<?>> messageConverters) {
     this.messageConverters = messageConverters;
   }
 
@@ -28,7 +26,7 @@ public class SerializationHelper {
       return null;
     }
 
-    List<HttpMessageConverter<?>> relevantConverters = messageConverters.getObject().getConverters().stream()
+    List<HttpMessageConverter<?>> relevantConverters = messageConverters.stream()
         .filter(converter -> converter.canWrite(payload.getClass(), mediaType))
         .collect(Collectors.toList());
 

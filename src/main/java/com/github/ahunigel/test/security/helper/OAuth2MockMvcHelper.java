@@ -1,14 +1,14 @@
 package com.github.ahunigel.test.security.helper;
 
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,7 +19,7 @@ public class OAuth2MockMvcHelper extends MockMvcHelper {
 
   public OAuth2MockMvcHelper(
       final MockMvc mockMvc,
-      final ObjectFactory<HttpMessageConverters> messageConverters,
+      final List<HttpMessageConverter<?>> messageConverters,
       final MediaType defaultMediaType) {
     super(mockMvc, messageConverters, defaultMediaType);
   }
