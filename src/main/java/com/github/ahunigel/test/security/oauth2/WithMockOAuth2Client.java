@@ -36,7 +36,7 @@ public @interface WithMockOAuth2Client {
 
     public static OAuth2Request getOAuth2Request(final WithMockOAuth2Client annotation) {
       final Set<? extends GrantedAuthority> authorities = Stream.of(annotation.authorities())
-          .map(auth -> new SimpleGrantedAuthority(auth))
+          .map(SimpleGrantedAuthority::new)
           .collect(Collectors.toSet());
 
       final Set<String> scope = Stream.of(annotation.scope())

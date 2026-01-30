@@ -45,10 +45,10 @@ public class AttachClaimsTestExecutionListener extends AbstractTestExecutionList
 
   public void attachClaimsToAuthentication(AttachClaims annotation) {
     Authentication authentication = TestSecurityContextHolder.getContext().getAuthentication();
-    if (authentication != null && authentication instanceof AbstractAuthenticationToken) {
+    if (authentication instanceof AbstractAuthenticationToken authToken) {
       Map<String, Object> claims = ClaimUtils.extractClaims(annotation);
       if (!claims.isEmpty()) {
-        ((AbstractAuthenticationToken) authentication).setDetails(claims);
+        authToken.setDetails(claims);
       }
     } else {
       log.warn("No authentication found, do not attach claims");

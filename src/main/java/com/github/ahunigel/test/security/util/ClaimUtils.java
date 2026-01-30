@@ -22,7 +22,7 @@ public class ClaimUtils {
   public static Map<String, Object> extractClaims(AttachClaims annotation) {
     Map<String, Object> claims = extractClaims(annotation.value());
     Map<String, String> pairs = extractClaims(annotation.claims());
-    pairs.entrySet().stream().forEach(entry -> claims.putIfAbsent(entry.getKey(), entry.getValue()));
+    pairs.forEach(claims::putIfAbsent);
     return claims;
   }
 

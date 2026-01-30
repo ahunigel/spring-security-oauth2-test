@@ -63,7 +63,7 @@ public class MockUserUtils {
         Stream.of(user.authorities());
 
     final Set<? extends GrantedAuthority> userAuthorities = grants
-        .map(auth -> new SimpleGrantedAuthority(auth))
+        .map(SimpleGrantedAuthority::new)
         .collect(Collectors.toSet());
 
     return new UsernamePasswordAuthenticationToken(

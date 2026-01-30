@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Nigel Zheng on 7/31/2018.
@@ -28,7 +27,7 @@ public class SerializationHelper {
 
     List<HttpMessageConverter<?>> relevantConverters = messageConverters.stream()
         .filter(converter -> converter.canWrite(payload.getClass(), mediaType))
-        .collect(Collectors.toList());
+        .toList();
 
     final ByteArrayHttpOutputMessage converted = new ByteArrayHttpOutputMessage();
     boolean isConverted = false;

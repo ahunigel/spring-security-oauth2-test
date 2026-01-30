@@ -28,7 +28,7 @@ public class OAuth2ControllerTest {
 
   @Before
   public void setUpTokenService() {
-    when(tokenService.loadAuthentication(api.VALID_TEST_TOKEN_VALUE))
+    when(tokenService.loadAuthentication(OAuth2MockMvcHelper.VALID_TEST_TOKEN_VALUE))
         .thenAnswer(invocation -> SecurityContextHolder.getContext().getAuthentication());
   }
 }

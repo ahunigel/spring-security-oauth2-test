@@ -95,15 +95,15 @@ public class WithTokenTestExecutionListener extends AbstractTestExecutionListene
     ResourceServerTokenServices tokenServices = testContext.getApplicationContext().getBean(ResourceServerTokenServices.class);
     when(tokenServices.loadAuthentication(withToken.value())).thenAnswer(invocation -> {
       Authentication authentication = TestSecurityContextHolder.getContext().getAuthentication();
-      if (authentication instanceof OAuth2Authentication) {
-        if (authentication.getDetails() instanceof OAuth2AuthenticationDetails) {
+      if (authentication instanceof OAuth2Authentication oAuth2Authentication) {
+        if (oAuth2Authentication.getDetails() instanceof OAuth2AuthenticationDetails oAuth2AuthDetails) {
           // reset details to claims when invoke mockmvc request more than once
-          Object decodedDetails = ((OAuth2AuthenticationDetails) authentication.getDetails()).getDecodedDetails();
+          Object decodedDetails = oAuth2AuthDetails.getDecodedDetails();
           if (decodedDetails instanceof Map) {
-            ((OAuth2Authentication) authentication).setDetails(decodedDetails);
+            oAuth2Authentication.setDetails(decodedDetails);
           }
         }
-        return (OAuth2Authentication) authentication;
+        return oAuth2Authentication;
       }
       return null;
     });
